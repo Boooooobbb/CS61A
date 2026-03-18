@@ -103,15 +103,15 @@ def with_if_function():
 
 def cond():
     "*** YOUR CODE HERE ***"
-    return True
+    return False
 
 def true_func():
     "*** YOUR CODE HERE ***"
-    return 47
+    print(42)
 
 def false_func():
     "*** YOUR CODE HERE ***"
-    return 42
+    print(47)
 
 
 def hailstone(n):
