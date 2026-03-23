@@ -34,14 +34,12 @@ def sum_digits(y):
     6
     """
     "*** YOUR CODE HERE ***"
-    i = 1
+
     total = 0
-    while y / 10 ** i >= 1:
-        left = y % 10 ** i
-        total += left // 10 ** (i - 1)
-        y -= left
-        i += 1
-    total += y // 10 ** (i - 1)
+    while y > 0:
+        left = y % 10
+        total += left
+        y = y // 10
     return total
 
 
@@ -63,5 +61,16 @@ def double_eights(n):
     False
     """
     "*** YOUR CODE HERE ***"
-
+    is_lastdigit_eight = False
+    while n > 0:
+        digit = n % 10
+        if digit == 8:
+            if is_lastdigit_eight:
+                return True
+            else:
+                is_lastdigit_eight = True
+        else:
+            is_lastdigit_eight = False
+        n = n // 10
+    return False
 
