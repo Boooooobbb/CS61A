@@ -165,14 +165,16 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
-    score0 += take_turn(strategy0(score0, score1), score1, dice)
-    while swine_align(score0, score1) or pig_pass(score0, score1):
-        score0 += take_turn(strategy0(score0, score1), score1, dice)
-    if score0 >= goal:
-        return score0, score1
-    score1 += take_turn(strategy1(score1, score0), score0, dice)
-    while swine_align(score1, score0) or pig_pass(score1, score0):
-        score1 += take_turn(strategy1(score1, score0), score0, dice)
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            score0 += take_turn(strategy0(score0, score1), score1, dice)
+            while extra_turn(score0, score1):
+                score0 += take_turn(strategy0(score0, score1), score1, dice)
+        else:
+            score1 += take_turn(strategy1(score1, score0), score0, dice)
+            while extra_turn(score1, score0):
+                score1 += take_turn(strategy1(score1, score0), score0, dice)
+        who = other(who)
     return score0, score1
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
