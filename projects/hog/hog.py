@@ -167,11 +167,11 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     "*** YOUR CODE HERE ***"
     strategy = [strategy0, strategy1]
     score = [score0, score1]
-    while score0 < goal and score1 < goal:
+    while score[0] < goal and score[1] < goal:
         score[who] += take_turn(strategy[who](score[who], score[other(who)]), score[other(who)], dice)
         if not extra_turn(score[who], score[other(who)]):
             who = other(who)
-    return score0, score1
+    return score[0], score[1]
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
