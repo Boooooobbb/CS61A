@@ -96,6 +96,13 @@ def swine_align(player_score, opponent_score):
     """
     # BEGIN PROBLEM 4a
     "*** YOUR CODE HERE ***"
+    if player_score == 0 or opponent_score == 0:
+        return False
+    gcd = 1
+    for i in range(2, min(player_score, opponent_score) + 1):
+        if (player_score % i == 0) and (opponent_score % i == 0):
+            gcd = i
+    return gcd >= 10
     # END PROBLEM 4a
 
 
@@ -118,6 +125,7 @@ def pig_pass(player_score, opponent_score):
     """
     # BEGIN PROBLEM 4b
     "*** YOUR CODE HERE ***"
+    return (player_score - opponent_score >= -2) and (player_score - opponent_score < 0)
     # END PROBLEM 4b
 
 
@@ -157,12 +165,20 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
     "*** YOUR CODE HERE ***"
+    score0 += take_turn(strategy0(score0, score1), score1, dice)
+    while swine_align(score0, score1) or pig_pass(score0, score1):
+        score0 += take_turn(strategy0(score0, score1), score1, dice)
+    if score0 >= goal:
+        return score0, score1
+    score1 += take_turn(strategy1(score1, score0), score0, dice)
+    while swine_align(score1, score0) or pig_pass(score1, score0):
+        score1 += take_turn(strategy1(score1, score0), score0, dice)
+    return score0, score1
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
     # END PROBLEM 6
-    return score0, score1
 
 
 #######################
