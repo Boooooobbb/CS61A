@@ -171,12 +171,13 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
         score[who] += take_turn(strategy[who](score[who], score[other(who)]), score[other(who)], dice)
         if not extra_turn(score[who], score[other(who)]):
             who = other(who)
-    return score[0], score[1]
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
+        say = say(score[0], score[1])
     # END PROBLEM 6
+    return score[0], score[1]
 
 
 #######################
