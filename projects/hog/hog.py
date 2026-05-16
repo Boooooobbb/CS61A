@@ -405,7 +405,13 @@ def extra_turn_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it rolls NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Replace this statement
+    # 在可以触发额外回合时，这种额外回合策略总是选择掷 0 次骰子。
+    # 指的是在掷 0 次骰子可以触发额外回合时
+    new_score = score + free_bacon(opponent_score)
+    if swine_align(new_score, opponent_score) or pig_pass(new_score, opponent_score):
+        return 0
+    else:
+        return bacon_strategy(score, opponent_score, cutoff, num_rolls) 
     # END PROBLEM 11
 
 
